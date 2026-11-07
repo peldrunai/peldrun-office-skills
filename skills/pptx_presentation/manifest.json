@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0.0",
+  "id": "pptx_presentation",
+  "version": "1.0.0",
+  "name": "PowerPoint Presentation Generator",
+  "display_name": "PowerPoint Presentation",
+  "description": "Generate PPTX presentations with layouts, bullet points, tables, charts, and images using python-pptx. Supports Arabic RTL slides, CJK, and Russian. Output saved to the workspace.",
+  "short_description": "Create PowerPoint decks with layouts, bullets, and charts.",
+  "store_description": "Creates .pptx decks using python-pptx. Uses built-in slide layouts (title, content, two-column, image) for consistent design. Supports bullet lists, tables, native charts (bar, line, pie), images, and speaker notes. Handles right-to-left text for Arabic, Hebrew, Persian, and Urdu. Always verifies the output file before reporting success.",
+  "brand_color": "#D24726",
+  "icon": "icon.svg",
+  "author": {
+    "name": "PELDRUN Community",
+    "url": "https://github.com/peldrunai"
+  },
+  "publisher_id": "org.peldrun.community",
+  "trust": "community",
+  "license": "MIT",
+  "homepage": "https://github.com/peldrunai/peldrun-office-skills",
+  "docs_url": "https://github.com/peldrunai/peldrun-office-skills/blob/main/skills/pptx_presentation/SKILL.md",
+  "release_date": "2026-11-08",
+  "stability": "stable",
+  "tags": [
+    "pptx",
+    "powerpoint",
+    "presentation",
+    "slides",
+    "deck",
+    "bullets",
+    "chart",
+    "multilingual",
+    "arabic",
+    "python-pptx"
+  ],
+  "capabilities": {
+    "chat_invocable": true,
+    "agent_assignable": true,
+    "workflow_node": false
+  },
+  "execution": {
+    "type": "instructions",
+    "instructions_file": "SKILL.md",
+    "references_dir": "references"
+  },
+  "compatibility": {
+    "peldrun_min_version": "0.2.0"
+  },
+  "limits": {
+    "max_instructions_bytes": 262144
+  },
+  "user_editable": true,
+  "supported_languages": ["en", "ar", "zh", "ja", "ru", "he"],
+  "examples": [
+    {
+      "description": "Create a 5-slide business pitch",
+      "invocation": "/pptx_presentation",
+      "context": "User provides company overview, problem, solution, and traction.",
+      "expected_outcome": "A 5-slide deck with title, problem, solution, traction table, and closing saved as pitch.pptx."
+    },
+    {
+      "description": "Generate an Arabic product presentation",
+      "invocation": "/pptx_presentation",
+      "context": "User provides Arabic text for title and bullet points.",
+      "expected_outcome": "A right-aligned RTL deck with Arabic bullet points and consistent slide layouts."
+    },
+    {
+      "description": "Create a Q4 results deck with a chart",
+      "invocation": "/pptx_presentation",
+      "context": "User provides quarterly revenue data.",
+      "expected_outcome": "A deck with a title slide and a data slide containing a native bar chart and results table."
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0.0",
+  "id": "docx_document",
+  "version": "1.0.0",
+  "name": "Word Document Generator",
+  "display_name": "Word Document",
+  "description": "Generate DOCX reports, letters, and contracts with full Unicode support (Arabic, Chinese, Japanese, Russian, Hebrew) using python-docx. Output saved to the workspace.",
+  "short_description": "Create multilingual Word documents with tables and images.",
+  "store_description": "Creates .docx files using python-docx. Handles any language (Arabic RTL via paragraph alignment, CJK, Cyrillic). Supports styled headings, tables with formulas, embedded images, headers/footers, and page breaks. Always verifies the output file before reporting success.",
+  "brand_color": "#2B579A",
+  "icon": "icon.svg",
+  "author": {
+    "name": "PELDRUN Community",
+    "url": "https://github.com/peldrunai"
+  },
+  "publisher_id": "org.peldrun.community",
+  "trust": "community",
+  "license": "MIT",
+  "homepage": "https://github.com/peldrunai/peldrun-office-skills",
+  "docs_url": "https://github.com/peldrunai/peldrun-office-skills/blob/main/skills/docx_document/SKILL.md",
+  "release_date": "2026-11-08",
+  "stability": "stable",
+  "tags": [
+    "docx",
+    "word",
+    "document",
+    "report",
+    "letter",
+    "contract",
+    "multilingual",
+    "arabic",
+    "python-docx"
+  ],
+  "capabilities": {
+    "chat_invocable": true,
+    "agent_assignable": true,
+    "workflow_node": false
+  },
+  "execution": {
+    "type": "instructions",
+    "instructions_file": "SKILL.md",
+    "references_dir": "references"
+  },
+  "compatibility": {
+    "peldrun_min_version": "0.2.0"
+  },
+  "limits": {
+    "max_instructions_bytes": 262144
+  },
+  "user_editable": true,
+  "supported_languages": ["en", "ar", "zh", "ja", "ru", "he"],
+  "examples": [
+    {
+      "description": "Create a business letter",
+      "invocation": "/docx_document",
+      "context": "User provides the recipient, subject, and body text.",
+      "expected_outcome": "A .docx file with formatted header, body, and signature saved as letter.docx."
+    },
+    {
+      "description": "Generate an Arabic contract",
+      "invocation": "/docx_document",
+      "context": "User provides contract clauses in Arabic.",
+      "expected_outcome": "A right-aligned .docx contract with proper Arabic paragraph direction and a signature block."
+    },
+    {
+      "description": "Create a project report with tables",
+      "invocation": "/docx_document",
+      "context": "User provides a project summary and a task table.",
+      "expected_outcome": "A .docx report with heading, styled table, and a chart image saved as report.docx."
+    }
+  ]
+}

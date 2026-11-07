@@ -1,0 +1,227 @@
+# .github/workflows/release.yml
+name: Release Skill
+
+on:
+  push:
+    tags:
+      # Match <skill_id>-v<semver>. Glob is intentionally permissive;
+      # the Parse step enforces the exact regex.
+      - '*-v[0-9]*.[0-9]*.[0-9]*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to release (e.g. pdf_document-v1.0.0)'
+        required: true
+        type: string
+
+concurrency:
+  # One release per tag; do not cancel an in-flight release.
+  group: release-${{ github.event.inputs.tag || github.ref_name }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build, publish, and update catalog
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout tagged ref
+        uses: actions/checkout@v4
+        with:
+          # On push: github.ref is 'refs/tags/pdf_document-v1.0.0'.
+          # On workflow_dispatch: user provides the tag name explicitly.
+          ref: ${{ github.event.inputs.tag || github.ref }}
+          fetch-depth: 1
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install 'jsonschema>=4.0'
+
+      - name: Parse tag
+        id: parse
+        env:
+          RAW_TAG: ${{ github.event.inputs.tag || github.ref_name }}
+        run: |
+          set -euo pipefail
+          TAG="$RAW_TAG"
+          echo "Raw tag: $TAG"
+
+          # Strict format: <skill_id>-v<semver>
+          if [[ ! "$TAG" =~ ^([a-z0-9][a-z0-9_]{2,63})-v([0-9]+\.[0-9]+\.[0-9]+(-[a-z0-9.-]+)?)$ ]]; then
+            echo "::error::Tag '$TAG' does not match '<skill_id>-v<semver>'"
+            echo "         Example: pdf_document-v1.0.0"
+            exit 1
+          fi
+
+          SKILL_ID="${BASH_REMATCH[1]}"
+          VERSION="${BASH_REMATCH[2]}"
+
+          SKILL_DIR="skills/$SKILL_ID"
+          if [ ! -d "$SKILL_DIR" ]; then
+            echo "::error::Skill directory not found: $SKILL_DIR"
+            exit 1
+          fi
+
+          MANIFEST="$SKILL_DIR/manifest.json"
+          if [ ! -s "$MANIFEST" ]; then
+            echo "::error::Manifest missing or empty: $MANIFEST"
+            exit 1
+          fi
+
+          MANIFEST_VERSION=$(python -c \
+            "import json,sys; print(json.load(open(sys.argv[1], encoding='utf-8'))['version'])" \
+            "$MANIFEST")
+
+          if [ "$MANIFEST_VERSION" != "$VERSION" ]; then
+            echo "::error::Tag version ($VERSION) does not match manifest version ($MANIFEST_VERSION)"
+            echo "         Bump $MANIFEST to $VERSION before tagging, or use the correct tag."
+            exit 1
+          fi
+
+          SKILL_NAME=$(python -c \
+            "import json,sys; m=json.load(open(sys.argv[1], encoding='utf-8')); print(m.get('name', sys.argv[2]))" \
+            "$MANIFEST" "$SKILL_ID")
+
+          SKILL_DESC=$(python -c \
+            "import json,sys; m=json.load(open(sys.argv[1], encoding='utf-8')); print(m.get('description', ''))" \
+            "$MANIFEST")
+
+          {
+            echo "skill_id=$SKILL_ID"
+            echo "version=$VERSION"
+            echo "skill_name=$SKILL_NAME"
+            echo "description=$SKILL_DESC"
+          } >> "$GITHUB_OUTPUT"
+
+          echo "Parsed: skill_id=$SKILL_ID version=$VERSION name=$SKILL_NAME"
+
+      - name: Validate tagged skill
+        run: |
+          python scripts/validate_skill.py "skills/${{ steps.parse.outputs.skill_id }}"
+
+      - name: Build deterministic ZIP
+        run: |
+          python scripts/build_zip.py --only "${{ steps.parse.outputs.skill_id }}"
+
+      - name: Verify ZIP exists
+        run: |
+          set -euo pipefail
+          ZIP="dist/${{ steps.parse.outputs.skill_id }}-${{ steps.parse.outputs.version }}.zip"
+          if [ ! -f "$ZIP" ]; then
+            echo "::error::Expected ZIP not found: $ZIP"
+            exit 1
+          fi
+          ls -lh "$ZIP"
+          echo "ZIP SHA-256:"
+          sha256sum "$ZIP"
+
+      - name: Update catalog (only this skill)
+        run: |
+          python scripts/update_catalog.py \
+            --only "${{ steps.parse.outputs.skill_id }}" \
+            --github-repo "${{ github.repository }}"
+
+      - name: Verify catalog entry matches ZIP checksum
+        run: |
+          python - <<'PY'
+          import hashlib, json, os, sys
+          from pathlib import Path
+
+          skill_id = os.environ["SKILL_ID"]
+          catalog = json.loads(Path("catalog.json").read_text(encoding="utf-8"))
+          entries = {e["id"]: e for e in catalog["skills"]}
+
+          if skill_id not in entries:
+              print(f"::error::{skill_id} is missing from catalog.json", file=sys.stderr)
+              sys.exit(1)
+
+          entry = entries[skill_id]
+          version = entry["version"]
+          zip_path = Path("dist") / f"{skill_id}-{version}.zip"
+
+          if not zip_path.is_file():
+              print(f"::error::ZIP not found: {zip_path}", file=sys.stderr)
+              sys.exit(1)
+
+          actual = hashlib.sha256(zip_path.read_bytes()).hexdigest()
+          expected = entry["checksum_sha256"]
+
+          if actual != expected:
+              print(f"::error::Checksum mismatch for {skill_id}", file=sys.stderr)
+              print(f"         catalog : {expected}", file=sys.stderr)
+              print(f"         actual  : {actual}",  file=sys.stderr)
+              sys.exit(1)
+
+          print(f"OK: {skill_id} v{version} sha256={actual}")
+          print(f"    download_url={entry['download_url']}")
+          PY
+        env:
+          SKILL_ID: ${{ steps.parse.outputs.skill_id }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.inputs.tag || github.ref_name }}
+          name: ${{ steps.parse.outputs.skill_name }} v${{ steps.parse.outputs.version }}
+          body: |
+            ## ${{ steps.parse.outputs.skill_name }} v${{ steps.parse.outputs.version }}
+
+            ${{ steps.parse.outputs.description }}
+
+            ### Install
+
+            **From the catalog:**
+            PELDRUN → Store → Skills → Catalog → find `${{ steps.parse.outputs.skill_id }}` → **Install**.
+
+            **Manual:**
+            Download the ZIP below → PELDRUN → Store → Skills → **Install Skill (.zip)**.
+
+            ### Files
+
+            - `${{ steps.parse.outputs.skill_id }}-${{ steps.parse.outputs.version }}.zip`
+          files: dist/${{ steps.parse.outputs.skill_id }}-${{ steps.parse.outputs.version }}.zip
+          fail_on_unmatched_files: true
+          draft: false
+          prerelease: ${{ contains(steps.parse.outputs.version, '-') }}
+
+      - name: Prepare catalog for deployment
+        run: |
+          mkdir -p catalog-dist
+          cp catalog.json catalog-dist/catalog.json
+          echo "--- catalog-dist ---"
+          ls -la catalog-dist/
+
+      - name: Deploy catalog to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./catalog-dist
+          publish_branch: gh-pages
+          keep_files: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: "chore: update catalog for ${{ steps.parse.outputs.skill_id }} v${{ steps.parse.outputs.version }}"
+
+      - name: Summary
+        run: |
+          {
+            echo "### Release ${{ steps.parse.outputs.skill_name }} v${{ steps.parse.outputs.version }}"
+            echo ""
+            echo "| Field | Value |"
+            echo "|---|---|"
+            echo "| Skill ID | \`${{ steps.parse.outputs.skill_id }}\` |"
+            echo "| Version | \`${{ steps.parse.outputs.version }}\` |"
+            echo "| Tag | \`${{ github.event.inputs.tag || github.ref_name }}\` |"
+            echo "| ZIP | \`dist/${{ steps.parse.outputs.skill_id }}-${{ steps.parse.outputs.version }}.zip\` |"
+            echo "| Catalog | https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/catalog.json |"
+          } >> "$GITHUB_STEP_SUMMARY"

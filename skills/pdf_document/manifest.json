@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0.0",
+  "id": "pdf_document",
+  "version": "1.0.0",
+  "name": "PDF Document Generator",
+  "display_name": "PDF Document",
+  "description": "Generate PDF reports, invoices, and certificates with full support for Arabic, Chinese, Japanese, and Russian using Playwright. Output saved to the workspace.",
+  "short_description": "Create multilingual PDFs with charts and images.",
+  "store_description": "Creates PDF documents from structured data using Playwright + Chromium. Handles any language (Arabic RTL, CJK, Cyrillic). Supports tables, images, and Chart.js visualizations. Always verifies the output file before reporting success.",
+  "brand_color": "#E74C3C",
+  "icon": "icon.svg",
+  "author": {
+    "name": "PELDRUN Community",
+    "url": "https://github.com/peldrunai"
+  },
+  "publisher_id": "org.peldrun.community",
+  "trust": "community",
+  "license": "MIT",
+  "homepage": "https://github.com/peldrunai/peldrun-office-skills",
+  "docs_url": "https://github.com/peldrunai/peldrun-office-skills/blob/main/skills/pdf_document/SKILL.md",
+  "release_date": "2026-11-08",
+  "stability": "stable",
+  "tags": [
+    "pdf",
+    "document",
+    "report",
+    "invoice",
+    "certificate",
+    "multilingual",
+    "arabic",
+    "playwright"
+  ],
+  "capabilities": {
+    "chat_invocable": true,
+    "agent_assignable": true,
+    "workflow_node": false
+  },
+  "execution": {
+    "type": "instructions",
+    "instructions_file": "SKILL.md",
+    "references_dir": "references"
+  },
+  "compatibility": {
+    "peldrun_min_version": "0.2.0"
+  },
+  "limits": {
+    "max_instructions_bytes": 262144
+  },
+  "user_editable": true,
+  "supported_languages": ["en", "ar", "zh", "ja", "ru"],
+  "examples": [
+    {
+      "description": "Create a monthly sales report",
+      "invocation": "/pdf_document",
+      "context": "User provides monthly sales data as a table or CSV.",
+      "expected_outcome": "A PDF with a title, a table, and a bar chart saved as sales_report.pdf in the workspace."
+    },
+    {
+      "description": "Generate an Arabic invoice",
+      "invocation": "/pdf_document",
+      "context": "User provides invoice line items and a customer name.",
+      "expected_outcome": "A right-to-left PDF invoice with proper Arabic shaping and a totals table."
+    }
+  ]
+}

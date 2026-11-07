@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0.0",
+  "id": "csv_data",
+  "version": "1.0.0",
+  "name": "CSV Data Handler",
+  "display_name": "CSV Data",
+  "description": "Generate, parse, filter, and transform CSV files using pandas. Handles UTF-8 with BOM for Excel compatibility, custom delimiters, and quoted fields. Output saved to the workspace.",
+  "short_description": "Create and transform CSV files with pandas.",
+  "store_description": "Creates and manipulates .csv files using pandas. Reads files with automatic delimiter and encoding detection (utf-8, utf-8-sig, latin-1, cp1256). Writes UTF-8 with BOM by default so Excel opens Arabic, Hebrew, CJK, and Cyrillic correctly. Supports filtering, aggregation, joins, pivots, and column selection. Always verifies the output file before reporting success.",
+  "brand_color": "#00897B",
+  "icon": "icon.svg",
+  "author": {
+    "name": "PELDRUN Community",
+    "url": "https://github.com/peldrunai"
+  },
+  "publisher_id": "org.peldrun.community",
+  "trust": "community",
+  "license": "MIT",
+  "homepage": "https://github.com/peldrunai/peldrun-office-skills",
+  "docs_url": "https://github.com/peldrunai/peldrun-office-skills/blob/main/skills/csv_data/SKILL.md",
+  "release_date": "2026-11-08",
+  "stability": "stable",
+  "tags": [
+    "csv",
+    "data",
+    "table",
+    "pandas",
+    "delimiter",
+    "encoding",
+    "utf-8",
+    "multilingual",
+    "arabic"
+  ],
+  "capabilities": {
+    "chat_invocable": true,
+    "agent_assignable": true,
+    "workflow_node": false
+  },
+  "execution": {
+    "type": "instructions",
+    "instructions_file": "SKILL.md"
+  },
+  "compatibility": {
+    "peldrun_min_version": "0.2.0"
+  },
+  "limits": {
+    "max_instructions_bytes": 262144
+  },
+  "user_editable": true,
+  "supported_languages": ["en", "ar", "zh", "ja", "ru", "he"],
+  "examples": [
+    {
+      "description": "Convert sales data to CSV",
+      "invocation": "/csv_data",
+      "context": "User provides sales records as text or a table.",
+      "expected_outcome": "A sales.csv file with headers, UTF-8 BOM encoding, and one row per record."
+    },
+    {
+      "description": "Filter and summarize a CSV",
+      "invocation": "/csv_data",
+      "context": "User uploads a large CSV and asks for rows where status='active'.",
+      "expected_outcome": "A filtered.csv containing only matching rows, with a summary of row counts."
+    },
+    {
+      "description": "Merge two CSV files",
+      "invocation": "/csv_data",
+      "context": "User provides two CSVs to join on a key column.",
+      "expected_outcome": "A merged.csv with columns from both files, joined on the specified key."
+    }
+  ]
+}

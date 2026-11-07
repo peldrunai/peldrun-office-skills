@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0.0",
+  "id": "xlsx_spreadsheet",
+  "version": "1.0.0",
+  "name": "Excel Spreadsheet Generator",
+  "display_name": "Excel Spreadsheet",
+  "description": "Generate XLSX spreadsheets with formulas, styling, charts, and conditional formatting using openpyxl. Supports Arabic RTL sheets, CJK, and Russian. Output saved to the workspace.",
+  "short_description": "Create Excel workbooks with formulas, formatting, and RTL sheets.",
+  "store_description": "Creates .xlsx workbooks using openpyxl. Handles formulas (=SUM, =VLOOKUP, =IF), cell styling (fonts, fills, borders, number formats), column widths, merged cells, images, and conditional formatting. Supports right-to-left worksheets for Arabic, Hebrew, Persian, and Urdu. Always verifies the output file before reporting success.",
+  "brand_color": "#217346",
+  "icon": "icon.svg",
+  "author": {
+    "name": "PELDRUN Community",
+    "url": "https://github.com/peldrunai"
+  },
+  "publisher_id": "org.peldrun.community",
+  "trust": "community",
+  "license": "MIT",
+  "homepage": "https://github.com/peldrunai/peldrun-office-skills",
+  "docs_url": "https://github.com/peldrunai/peldrun-office-skills/blob/main/skills/xlsx_spreadsheet/SKILL.md",
+  "release_date": "2026-11-08",
+  "stability": "stable",
+  "tags": [
+    "xlsx",
+    "excel",
+    "spreadsheet",
+    "workbook",
+    "formula",
+    "table",
+    "data",
+    "multilingual",
+    "arabic",
+    "openpyxl"
+  ],
+  "capabilities": {
+    "chat_invocable": true,
+    "agent_assignable": true,
+    "workflow_node": false
+  },
+  "execution": {
+    "type": "instructions",
+    "instructions_file": "SKILL.md",
+    "references_dir": "references"
+  },
+  "compatibility": {
+    "peldrun_min_version": "0.2.0"
+  },
+  "limits": {
+    "max_instructions_bytes": 262144
+  },
+  "user_editable": true,
+  "supported_languages": ["en", "ar", "zh", "ja", "ru", "he"],
+  "examples": [
+    {
+      "description": "Create a sales report with formulas",
+      "invocation": "/xlsx_spreadsheet",
+      "context": "User provides monthly sales data.",
+      "expected_outcome": "An XLSX with headers, styled cells, =SUM totals, and a bar chart saved as sales.xlsx."
+    },
+    {
+      "description": "Generate an Arabic inventory sheet",
+      "invocation": "/xlsx_spreadsheet",
+      "context": "User provides product names and quantities in Arabic.",
+      "expected_outcome": "A right-to-left XLSX with Arabic headers, RTL number format, and conditional highlighting for low stock."
+    },
+    {
+      "description": "Create a budget with VLOOKUP",
+      "invocation": "/xlsx_spreadsheet",
+      "context": "User provides a category table and an expense log.",
+      "expected_outcome": "A two-sheet XLSX: categories + expenses, with =VLOOKUP pulling category names into the expense sheet."
+    }
+  ]
+}

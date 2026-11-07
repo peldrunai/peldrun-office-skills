@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0.0",
+  "id": "markdown_doc",
+  "version": "1.0.0",
+  "name": "Markdown Document Converter",
+  "display_name": "Markdown Document",
+  "description": "Convert Markdown files to styled PDF or HTML documents with code highlighting, tables, and RTL support using markdown-it and Playwright. Output saved to the workspace.",
+  "short_description": "Convert Markdown to styled PDF or HTML.",
+  "store_description": "Converts .md files to PDF using markdown-it for parsing and Playwright + Chromium for rendering. Supports CommonMark and GFM tables, code blocks with syntax highlighting, inline HTML, footnotes, and automatic RTL detection for Arabic and Hebrew. Produces clean typography with configurable CSS. Always verifies the output file before reporting success.",
+  "brand_color": "#6C5CE7",
+  "icon": "icon.svg",
+  "author": {
+    "name": "PELDRUN Community",
+    "url": "https://github.com/peldrunai"
+  },
+  "publisher_id": "org.peldrun.community",
+  "trust": "community",
+  "license": "MIT",
+  "homepage": "https://github.com/peldrunai/peldrun-office-skills",
+  "docs_url": "https://github.com/peldrunai/peldrun-office-skills/blob/main/skills/markdown_doc/SKILL.md",
+  "release_date": "2026-11-08",
+  "stability": "stable",
+  "tags": [
+    "markdown",
+    "md",
+    "document",
+    "convert",
+    "pdf",
+    "html",
+    "gfm",
+    "playwright",
+    "markdown-it",
+    "multilingual",
+    "arabic"
+  ],
+  "capabilities": {
+    "chat_invocable": true,
+    "agent_assignable": true,
+    "workflow_node": false
+  },
+  "execution": {
+    "type": "instructions",
+    "instructions_file": "SKILL.md"
+  },
+  "compatibility": {
+    "peldrun_min_version": "0.2.0"
+  },
+  "limits": {
+    "max_instructions_bytes": 262144
+  },
+  "user_editable": true,
+  "supported_languages": ["en", "ar", "zh", "ja", "ru", "he"],
+  "examples": [
+    {
+      "description": "Convert a README to PDF",
+      "invocation": "/markdown_doc",
+      "context": "User provides a README.md file.",
+      "expected_outcome": "A styled PDF with headers, code blocks, and a table of contents saved as README.pdf."
+    },
+    {
+      "description": "Convert an Arabic document",
+      "invocation": "/markdown_doc",
+      "context": "User provides an Arabic Markdown file with RTL content.",
+      "expected_outcome": "A right-aligned PDF with proper Arabic shaping and RTL tables."
+    },
+    {
+      "description": "Convert with custom CSS",
+      "invocation": "/markdown_doc",
+      "context": "User provides a Markdown file and a CSS file for styling.",
+      "expected_outcome": "A PDF that uses the user's CSS on top of the default typography."
+    }
+  ]
+}
