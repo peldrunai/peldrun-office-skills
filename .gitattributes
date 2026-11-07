@@ -1,0 +1,27 @@
+# .gitattributes
+# Normalize line endings across platforms.
+
+# Default: let Git detect text files and normalize to LF on commit.
+* text=auto
+
+# Explicit LF (no CRLF) for scripts and configs that must be portable.
+*.py    text eol=lf
+*.sh    text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+*.json  text eol=lf
+*.md    text eol=lf
+*.svg   text eol=lf
+*.txt   text eol=lf
+
+# Keep LF for the manifest schema (parsed by jsonschema on any OS).
+manifest.schema.json text eol=lf
+
+# Binary files: never touch.
+*.zip   binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.pdf   binary
