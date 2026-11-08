@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-08T00:28:04Z",
+  "updated_at": "2026-11-08T00:28:26Z",
   "skills": [
     {
       "id": "csv_data",
       "name": "CSV Data Handler",
-      "version": "1.0.1",
+      "version": "1.0.0",
       "description": "Generate, parse, filter, and transform CSV files using pandas. Handles UTF-8 with BOM for Excel compatibility, custom delimiters, and quoted fields. Output saved to the workspace.",
-      "download_url": "https://github.com/peldrunai/peldrun-office-skills/releases/download/csv_data-v1.0.1/csv_data-1.0.1.zip",
-      "checksum_sha256": "3b12d2296884f5e2c42e4c43f76f13300b2746870046f09bb1ee21c0c12ad690",
+      "download_url": "https://github.com/peldrunai/peldrun-office-skills/releases/download/csv_data-v1.0.0/csv_data-1.0.0.zip",
+      "checksum_sha256": "3f4c828893a44b559c3d1de81d5ea108873b82dc3487c2d27905c958cb49c55f",
       "tags": [
         "csv",
         "data",
@@ -57,10 +57,10 @@
     {
       "id": "markdown_doc",
       "name": "Markdown Document Converter",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "description": "Convert Markdown files to styled PDF or HTML documents with code highlighting, tables, and RTL support using markdown-it and Playwright. Output saved to the workspace.",
-      "download_url": "https://github.com/peldrunai/peldrun-office-skills/releases/download/markdown_doc-v1.0.0/markdown_doc-1.0.0.zip",
-      "checksum_sha256": "24c77276f29d523ece8acc16f27ac52fa7717ad91c5c4bf528dcbd1f8c38e78b",
+      "download_url": "https://github.com/peldrunai/peldrun-office-skills/releases/download/markdown_doc-v1.0.1/markdown_doc-1.0.1.zip",
+      "checksum_sha256": "d0a5e2a2f3cb0c25f5417b1f81d4e66a68384266a08caefa07f4559b7b6147c1",
       "tags": [
         "markdown",
         "md",
