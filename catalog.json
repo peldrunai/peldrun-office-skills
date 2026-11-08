@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-08T00:26:45Z",
+  "updated_at": "2026-11-08T00:26:59Z",
   "skills": [
     {
       "id": "csv_data",
@@ -31,10 +31,10 @@
     {
       "id": "docx_document",
       "name": "Word Document Generator",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "description": "Generate DOCX reports, letters, and contracts with full Unicode support (Arabic, Chinese, Japanese, Russian, Hebrew) using python-docx. Output saved to the workspace.",
-      "download_url": "https://github.com/peldrunai/peldrun-office-skills/releases/download/docx_document-v1.0.0/docx_document-1.0.0.zip",
-      "checksum_sha256": "266114641a372b40bfcfbcb4a734dc76a55f51d2431e39ae7bf384588f328f7b",
+      "download_url": "https://github.com/peldrunai/peldrun-office-skills/releases/download/docx_document-v1.0.1/docx_document-1.0.1.zip",
+      "checksum_sha256": "c4001b97ed4ebbbea09db9645359499180d83da3fa3aecda3fcc8a3f1450cf43",
       "tags": [
         "docx",
         "word",
@@ -85,10 +85,10 @@
     {
       "id": "pdf_document",
       "name": "PDF Document Generator",
-      "version": "1.0.1",
+      "version": "1.0.0",
       "description": "Generate PDF reports, invoices, and certificates with full support for Arabic, Chinese, Japanese, and Russian using Playwright. Output saved to the workspace.",
-      "download_url": "https://github.com/peldrunai/peldrun-office-skills/releases/download/pdf_document-v1.0.1/pdf_document-1.0.1.zip",
-      "checksum_sha256": "8ae7a6b4bc94c39a6d8ab31e25a051fdc5f8b854de2d635fb1516a51fda1711e",
+      "download_url": "https://github.com/peldrunai/peldrun-office-skills/releases/download/pdf_document-v1.0.0/pdf_document-1.0.0.zip",
+      "checksum_sha256": "8ed464e5e6934b4521403f09ee1deaf40a539252890c2bba4de1cb55c9f560cc",
       "tags": [
         "pdf",
         "document",
