@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "id": "pdf_document",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "PDF Document Generator",
   "display_name": "PDF Document",
   "description": "Generate PDF reports, invoices, and certificates with full support for Arabic, Chinese, Japanese, and Russian using Playwright. Output saved to the workspace.",
@@ -47,7 +47,13 @@
     "max_instructions_bytes": 262144
   },
   "user_editable": true,
-  "supported_languages": ["en", "ar", "zh", "ja", "ru"],
+  "supported_languages": [
+    "en",
+    "ar",
+    "zh",
+    "ja",
+    "ru"
+  ],
   "examples": [
     {
       "description": "Create a monthly sales report",

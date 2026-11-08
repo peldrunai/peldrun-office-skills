@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "id": "markdown_doc",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "Markdown Document Converter",
   "display_name": "Markdown Document",
   "description": "Convert Markdown files to styled PDF or HTML documents with code highlighting, tables, and RTL support using markdown-it and Playwright. Output saved to the workspace.",
@@ -49,7 +49,14 @@
     "max_instructions_bytes": 262144
   },
   "user_editable": true,
-  "supported_languages": ["en", "ar", "zh", "ja", "ru", "he"],
+  "supported_languages": [
+    "en",
+    "ar",
+    "zh",
+    "ja",
+    "ru",
+    "he"
+  ],
   "examples": [
     {
       "description": "Convert a README to PDF",

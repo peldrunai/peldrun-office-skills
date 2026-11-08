@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "id": "csv_data",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "CSV Data Handler",
   "display_name": "CSV Data",
   "description": "Generate, parse, filter, and transform CSV files using pandas. Handles UTF-8 with BOM for Excel compatibility, custom delimiters, and quoted fields. Output saved to the workspace.",
@@ -47,7 +47,14 @@
     "max_instructions_bytes": 262144
   },
   "user_editable": true,
-  "supported_languages": ["en", "ar", "zh", "ja", "ru", "he"],
+  "supported_languages": [
+    "en",
+    "ar",
+    "zh",
+    "ja",
+    "ru",
+    "he"
+  ],
   "examples": [
     {
       "description": "Convert sales data to CSV",

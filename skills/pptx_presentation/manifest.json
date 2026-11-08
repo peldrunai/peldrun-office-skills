@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "id": "pptx_presentation",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "PowerPoint Presentation Generator",
   "display_name": "PowerPoint Presentation",
   "description": "Generate PPTX presentations with layouts, bullet points, tables, charts, and images using python-pptx. Supports Arabic RTL slides, CJK, and Russian. Output saved to the workspace.",
@@ -49,7 +49,14 @@
     "max_instructions_bytes": 262144
   },
   "user_editable": true,
-  "supported_languages": ["en", "ar", "zh", "ja", "ru", "he"],
+  "supported_languages": [
+    "en",
+    "ar",
+    "zh",
+    "ja",
+    "ru",
+    "he"
+  ],
   "examples": [
     {
       "description": "Create a 5-slide business pitch",

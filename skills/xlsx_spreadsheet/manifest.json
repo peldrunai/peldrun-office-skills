@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "id": "xlsx_spreadsheet",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "Excel Spreadsheet Generator",
   "display_name": "Excel Spreadsheet",
   "description": "Generate XLSX spreadsheets with formulas, styling, charts, and conditional formatting using openpyxl. Supports Arabic RTL sheets, CJK, and Russian. Output saved to the workspace.",
@@ -49,7 +49,14 @@
     "max_instructions_bytes": 262144
   },
   "user_editable": true,
-  "supported_languages": ["en", "ar", "zh", "ja", "ru", "he"],
+  "supported_languages": [
+    "en",
+    "ar",
+    "zh",
+    "ja",
+    "ru",
+    "he"
+  ],
   "examples": [
     {
       "description": "Create a sales report with formulas",

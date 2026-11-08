@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "id": "docx_document",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "Word Document Generator",
   "display_name": "Word Document",
   "description": "Generate DOCX reports, letters, and contracts with full Unicode support (Arabic, Chinese, Japanese, Russian, Hebrew) using python-docx. Output saved to the workspace.",
@@ -48,7 +48,14 @@
     "max_instructions_bytes": 262144
   },
   "user_editable": true,
-  "supported_languages": ["en", "ar", "zh", "ja", "ru", "he"],
+  "supported_languages": [
+    "en",
+    "ar",
+    "zh",
+    "ja",
+    "ru",
+    "he"
+  ],
   "examples": [
     {
       "description": "Create a business letter",
