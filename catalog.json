@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-08T00:27:15Z",
+  "updated_at": "2026-11-08T00:27:47Z",
   "skills": [
     {
       "id": "csv_data",
@@ -110,10 +110,10 @@
     {
       "id": "pptx_presentation",
       "name": "PowerPoint Presentation Generator",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "description": "Generate PPTX presentations with layouts, bullet points, tables, charts, and images using python-pptx. Supports Arabic RTL slides, CJK, and Russian. Output saved to the workspace.",
-      "download_url": "https://github.com/peldrunai/peldrun-office-skills/releases/download/pptx_presentation-v1.0.0/pptx_presentation-1.0.0.zip",
-      "checksum_sha256": "64ce6079283dcba476e760ca0c87803edc8f242cd8d43fc85d9dee0ca5d1fed0",
+      "download_url": "https://github.com/peldrunai/peldrun-office-skills/releases/download/pptx_presentation-v1.0.1/pptx_presentation-1.0.1.zip",
+      "checksum_sha256": "b173aa6deb0ae8086c5e1b9d8ff91e515b03ed695fa5acdd91f8f6927b3c34f4",
       "tags": [
         "pptx",
         "powerpoint",
@@ -137,10 +137,10 @@
     {
       "id": "xlsx_spreadsheet",
       "name": "Excel Spreadsheet Generator",
-      "version": "1.0.1",
+      "version": "1.0.0",
       "description": "Generate XLSX spreadsheets with formulas, styling, charts, and conditional formatting using openpyxl. Supports Arabic RTL sheets, CJK, and Russian. Output saved to the workspace.",
-      "download_url": "https://github.com/peldrunai/peldrun-office-skills/releases/download/xlsx_spreadsheet-v1.0.1/xlsx_spreadsheet-1.0.1.zip",
-      "checksum_sha256": "9e0d9d6f3d7f6f3dbd976eec1e5a28d3c1edc96f9ffabb1ddaffe02098291a2b",
+      "download_url": "https://github.com/peldrunai/peldrun-office-skills/releases/download/xlsx_spreadsheet-v1.0.0/xlsx_spreadsheet-1.0.0.zip",
+      "checksum_sha256": "d99de7a01448383decd7342f28382c448f34ce878a2c6b86ea309ec3e186e355",
       "tags": [
         "xlsx",
         "excel",
