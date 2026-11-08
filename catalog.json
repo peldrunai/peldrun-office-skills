@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-08T00:27:47Z",
+  "updated_at": "2026-11-08T00:28:04Z",
   "skills": [
     {
       "id": "csv_data",
       "name": "CSV Data Handler",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "description": "Generate, parse, filter, and transform CSV files using pandas. Handles UTF-8 with BOM for Excel compatibility, custom delimiters, and quoted fields. Output saved to the workspace.",
-      "download_url": "https://github.com/peldrunai/peldrun-office-skills/releases/download/csv_data-v1.0.0/csv_data-1.0.0.zip",
-      "checksum_sha256": "3f4c828893a44b559c3d1de81d5ea108873b82dc3487c2d27905c958cb49c55f",
+      "download_url": "https://github.com/peldrunai/peldrun-office-skills/releases/download/csv_data-v1.0.1/csv_data-1.0.1.zip",
+      "checksum_sha256": "3b12d2296884f5e2c42e4c43f76f13300b2746870046f09bb1ee21c0c12ad690",
       "tags": [
         "csv",
         "data",
@@ -110,10 +110,10 @@
     {
       "id": "pptx_presentation",
       "name": "PowerPoint Presentation Generator",
-      "version": "1.0.1",
+      "version": "1.0.0",
       "description": "Generate PPTX presentations with layouts, bullet points, tables, charts, and images using python-pptx. Supports Arabic RTL slides, CJK, and Russian. Output saved to the workspace.",
-      "download_url": "https://github.com/peldrunai/peldrun-office-skills/releases/download/pptx_presentation-v1.0.1/pptx_presentation-1.0.1.zip",
-      "checksum_sha256": "b173aa6deb0ae8086c5e1b9d8ff91e515b03ed695fa5acdd91f8f6927b3c34f4",
+      "download_url": "https://github.com/peldrunai/peldrun-office-skills/releases/download/pptx_presentation-v1.0.0/pptx_presentation-1.0.0.zip",
+      "checksum_sha256": "64ce6079283dcba476e760ca0c87803edc8f242cd8d43fc85d9dee0ca5d1fed0",
       "tags": [
         "pptx",
         "powerpoint",
